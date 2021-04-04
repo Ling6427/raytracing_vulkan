@@ -13,6 +13,7 @@
 #include <iostream>
 #include <sstream>
 
+//test
 namespace
 {
 	const bool EnableValidationLayers =
