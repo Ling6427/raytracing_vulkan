@@ -30,8 +30,10 @@ public:
 
 	static SceneAssets CubeAndSpheres(CameraInitialSate& camera);
 	static SceneAssets RayTracingInOneWeekend(CameraInitialSate& camera);
+	static SceneAssets Mscene(CameraInitialSate& camera);
 	static SceneAssets PlanetsInOneWeekend(CameraInitialSate& camera);
 	static SceneAssets LucyInOneWeekend(CameraInitialSate& camera);
+	static SceneAssets UnderwaterInOneWeekend(CameraInitialSate& camera);
 	static SceneAssets CornellBox(CameraInitialSate& camera);
 	static SceneAssets CornellBoxLucy(CameraInitialSate& camera);
 
