@@ -4,11 +4,19 @@
 #include "Assets/Texture.hpp"
 #include <functional>
 #include <random>
+//#include "MarbleTexture.hpp"
+//#include "NoiseTexture.hpp"
+
+//#include "RandomGenerator.hpp"
+//#include "CheckerTexture.hpp"
+//#include "ConstantTexture.hpp"
+#include <iostream>
 
 using namespace glm;
 using Assets::Material;
 using Assets::Model;
 using Assets::Texture;
+using namespace std;
 
 const std::vector<std::pair<std::string, std::function<SceneAssets (SceneList::CameraInitialSate&)>>> SceneList::AllScenes =
 {
@@ -126,7 +134,14 @@ SceneAssets SceneList::Mscene(CameraInitialSate& camera)
 
 	std::vector<Model> models;
 	std::vector<Texture> textures;
-
+	//std::shared_ptr<p_texture> m = std::make_shared<MarbleTexture>(0.2f);
+	//std::vector<std::shared_ptr<p_texture>> MarbleTexture(0.2f);
+	//std::vector<shared_ptr<p_texture>> m(100);
+    //std::shared_ptr<p_texture> checkerTexture = std::make_shared<CheckerTexture>(
+    //                                             std::make_shared<ConstantTexture>(Vec3(0.1f, 0.1f, 0.1f)),
+    //                                              std::make_shared<ConstantTexture>(Vec3(0.9f, 0.9f, 0.9f))
+    //                                              );
+	
 	models.push_back(Model::CreateSphere(vec3(0, -1000, 0), 1000, Material::Lambertian(vec3(0.5f, 0.5f, 0.5f)), isProc));
 
 	for (int a = -11; a < 11; ++a)
@@ -165,8 +180,13 @@ SceneAssets SceneList::Mscene(CameraInitialSate& camera)
 	models.push_back(Model::CreateSphere(vec3(-4, 1, 0), 1.0f, Material::Lambertian(vec3(0.4f, 0.2f, 0.1f)), isProc));
 	models.push_back(Model::CreateSphere(vec3(4, 1, 0), 1.0f, Material::Metallic(vec3(0.7f, 0.6f, 0.5f), 0.0f), isProc));
 
+	//models.push_back(Model::CreateSphere(vec3(6, 1, 0),1.0f, Material::Lambertian(vec3(0.4f, 0.2f, 0.1f)), isProc));
+
 	models.push_back(Model::CreateSphere(vec3(-10, 0, 0), 30, Material::Metallic(vec3(1.0f), 0.0f, 0), isProc));
 
+	//m.push_back(checkerTexture);
+
+	//cout << models[0];
 	//textures.push_back(Texture::LoadTexture("../assets/textures/2k_mars.jpg", Vulkan::SamplerConfig()));
 	textures.push_back(Texture::LoadTexture("../assets/textures/cloud.jpg", Vulkan::SamplerConfig()));
 	//textures.push_back(Texture::LoadTexture("../assets/textures/2k_moon.jpg", Vulkan::SamplerConfig()));
@@ -371,16 +391,16 @@ SceneAssets SceneList::UnderwaterInOneWeekend(CameraInitialSate& camera)
 	
 	models.push_back(Model::CreateSphere(vec3(0, -1000, 0), 1000, Material::Lambertian(vec3(0.5f, 0.5f, 0.5f)), isProc));
 
-	for (int a = -11; a < 11; ++a)
+	for (int a = -11; a < 8; ++a)
 	{
-		for (int b = -11; b < 11; ++b)
+		for (int b = -11; b < 9; ++b)
 		{
 			const float chooseMat = random();
 			const vec3 center(a + 0.9f*random(), 0.2f, b + 0.9f*random());
 
 			if (length(center - vec3(4, 0.2f, 0)) > 0.9)
 			{
-				if (chooseMat < 0.8f) // Diffuse
+				if (chooseMat < 0.5f) // Diffuse
 				{
 					models.push_back(Model::CreateSphere(center, 0.2f, Material::Lambertian(vec3(
 						random()*random(),
@@ -388,7 +408,7 @@ SceneAssets SceneList::UnderwaterInOneWeekend(CameraInitialSate& camera)
 						random()*random())),
 						isProc));
 				}
-				else if (chooseMat < 0.95f) // Metal
+				else if (chooseMat < 0.85f) // Metal
 				{
 					models.push_back(Model::CreateSphere(center, 0.2f, Material::Metallic(
 						vec3(0.5f*(1 + random()), 0.5f*(1 + random()), 0.5f*(1 + random())),
@@ -404,44 +424,76 @@ SceneAssets SceneList::UnderwaterInOneWeekend(CameraInitialSate& camera)
 	}
 
 	//auto lucy0 = Model::LoadModel("../assets/models/lucy.obj");
-	auto lucy0 = Model::LoadModel("../assets/models/dolphin.obj");
-	auto lucy1 = lucy0;
-	auto lucy2 = lucy0;
+	auto dolphin0 = Model::LoadModel("../assets/models/dolphin.obj");
+	auto dolphin1 = dolphin0;
+	auto dolphin2 = dolphin0;
+	auto dolphin3 = dolphin0;
+	auto dolphin4 = dolphin0;
+	auto dolphin5 = dolphin0;
 
 	const auto i = mat4(1);
 	//const float scaleFactor = 0.0035f;
 	const float scaleFactor = 0.03f;
 
-	lucy0.Transform(
+	dolphin0.Transform(
 		rotate(
 			scale(
 				translate(i, vec3(0, 2.0f, 0)), 
 				vec3(scaleFactor)),
 			radians(-90.0f), vec3(1, 0, 0)));
 
-	lucy1.Transform(
+	dolphin1.Transform(
 		rotate(
 			scale(
-				translate(i, vec3(-4, 2.0f, 2)),
+				translate(i, vec3(-4, 2.0f, 4)),
 				vec3(scaleFactor)),
-			radians(-90.0f), vec3(1, 0, 0)));
+			radians(-110.0f), vec3(1, 0, 0)));
 
-	lucy2.Transform(
+	dolphin2.Transform(
 		rotate(
 			scale(
 				translate(i, vec3(4, 2.0f, -2)),
 				vec3(scaleFactor)),
-			radians(-90.0f), vec3(1, 0, 0)));		
+			radians(-90.0f), vec3(1, 0, 0)));	
 
-	lucy0.SetMaterial(Material::Dielectric(1.5f));
-	lucy1.SetMaterial(Material::Lambertian(vec3(0.4f, 0.2f, 0.1f)));
-	lucy2.SetMaterial(Material::Metallic(vec3(0.7f, 0.6f, 0.5f), 0.05f));
+	dolphin3.Transform(
+		rotate(
+			scale(
+				translate(i, vec3(7, 2.5f, -3)),
+				vec3(scaleFactor)),
+			radians(-140.0f), vec3(1, 0, 0)));
+	dolphin4.Transform(
+		rotate(
+			scale(
+				translate(i, vec3(-8, 4.0f, 9)),
+				vec3(0.05)),
+			radians(-80.0f), vec3(1, 0, 0)));	
+	dolphin5.Transform(
+		rotate(
+			scale(
+				translate(i, vec3(-6, 4.8f, 14)),
+				vec3(0.05)),
+			radians(-70.0f), vec3(1, 0, 0)));	
 
-	models.push_back(std::move(lucy0));
-	models.push_back(std::move(lucy1));
-	models.push_back(std::move(lucy2));
+	dolphin0.SetMaterial(Material::Dielectric(1.5f));
+	dolphin1.SetMaterial(Material::Lambertian(vec3(0.39f, 0.58f, 0.92f)));
+	dolphin2.SetMaterial(Material::Metallic(vec3(0.7f, 0.6f, 0.5f), 0.05f));
+	dolphin3.SetMaterial(Material::Dielectric(1.6f));
+	dolphin4.SetMaterial(Material::Metallic(vec3(0.7f, 0.6f, 0.5f), 0.05f));
+	dolphin5.SetMaterial(Material::Lambertian(vec3(0.87f, 0.63f, 0.87f)));
 
-	models.push_back(Model::CreateSphere(vec3(-10, 0, 0), 30, Material::Metallic(vec3(1.0f), 0.0f, 0), isProc));
+	models.push_back(std::move(dolphin0));
+	models.push_back(std::move(dolphin1));
+	models.push_back(std::move(dolphin2));
+	models.push_back(std::move(dolphin3));
+	models.push_back(std::move(dolphin4));
+	models.push_back(std::move(dolphin5));
+
+
+	models.push_back(Model::CreateSphere(vec3(0.5, 6.7, -7.2),1.5f, Material::Lambertian(vec3(0.6f, 0.5f, 0.5f),0), isProc));
+
+	models.push_back(Model::CreateSphere(vec3(-10, 0, 0), 30, Material::Metallic(vec3(1.0f), 0.0f, 1), isProc));
+	textures.push_back(Texture::LoadTexture("../assets/textures/tex.jpg", Vulkan::SamplerConfig()));
 	textures.push_back(Texture::LoadTexture("../assets/textures/sea1.jpg", Vulkan::SamplerConfig()));
 
 	//return std::forward_as_tuple(std::move(models), std::vector<Texture>());
