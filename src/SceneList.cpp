@@ -176,13 +176,16 @@ SceneAssets SceneList::Mscene(CameraInitialSate& camera)
 		}
 	}
 
-	models.push_back(Model::CreateSphere(vec3(0, 1, 0), 1.0f, Material::Metallic(vec3(1.0f), 0.1f, 2), isProc));
-	//models.push_back(Model::CreateSphere(vec3(-4, 1, 0), 1.0f, Material::Lambertian(vec3(1.0f), 0), isProc));
+	//models.push_back(Model::CreateSphere(vec3(0, 1, 0), 1.0f, Material::Metallic(vec3(1.0f), 0.1f, 2), isProc));
+	models.push_back(Model::CreateSphere(vec3(0, 1, 0), 1.0f, Material::Lambertian(vec3(1.0f), 2), isProc));
 	//models.push_back(Model::CreateSphere(vec3(4, 1, 0), 1.0f, Material::Metallic(vec3(1.0f), 0.0f, 1), isProc));
 
 	//models.push_back(Model::CreateSphere(vec3(0, 1, 0), 1.0f, Material::Dielectric((1.5f),0.0f,3), isProc));
-	models.push_back(Model::CreateSphere(vec3(-4, 1, 1), 1.0f, Material::Lambertian(vec3(1.0f, 1.0f, 1.0f),1), isProc));
-	models.push_back(Model::CreateSphere(vec3(4, 1, -0.5), 1.0f, Material::Metallic(vec3(1.0f), 0.0f,3), isProc));
+	//models.push_back(Model::CreateSphere(vec3(-4, 1, 1), 1.0f, Material::Lambertian(vec3(1.0f, 1.0f, 1.0f),1), isProc));
+	//models.push_back(Model::CreateSphere(vec3(4, 1, -0.5), 1.0f, Material::Metallic(vec3(1.0f), 0.0f,3), isProc));
+
+	models.push_back(Model::CreateSphere(vec3(-4, 1, 1), 1.0f, Material::Lambertian(vec3(1.0f),1), isProc));
+	models.push_back(Model::CreateSphere(vec3(4, 1, -0.5), 1.0f, Material::Lambertian(vec3(1.0f),3), isProc));
 
 	//models.push_back(Model::CreateSphere(vec3(6, 1, 0),1.0f, Material::Lambertian(vec3(0.4f, 0.2f, 0.1f)), isProc));
 
